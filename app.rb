@@ -2,6 +2,8 @@ require 'sinatra'
 
 set :port, ENV.fetch('PORT', 4567)
 set :bind, '0.0.0.0'
+set :server, 'puma'
+
 
 # Configure Sinatra to serve static files from public folder
 set :public_folder, 'public'
