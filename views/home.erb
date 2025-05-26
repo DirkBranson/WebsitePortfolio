@@ -1,0 +1,92 @@
+<body class=dark>
+<h2>Welcome to the Digital Frontier</h2>
+
+<p>Greetings! I'm Dr. Neo Cyberdyne, a quantum data archaeologist passionate about neural network harmonics and virtual reality paradigms. This digital construct showcases my explorations into the intersection of human consciousness and artificial intelligence.</p>
+
+<p>Navigate through the holographic interface above to discover my journey through cyberspace, current research into digital sentience, professional achievements in the year 2025, and my fascination with the convergence of mind and machine.</p>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<div id="animation-container" style="width: 100%; height: 100vh;"></div>
+
+<script>
+  // Basic Three.js setup
+  const container = document.getElementById('animation-container');
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+
+  renderer.setSize(container.offsetWidth, container.offsetHeight);
+  container.appendChild(renderer.domElement);
+
+  // Create a dynamic geometry landscape using BufferGeometry
+  const geometry = new THREE.PlaneGeometry(50, 50, 100, 100);
+  geometry.rotateX(-Math.PI / 2); // Rotate the plane to lie flat
+  const material = new THREE.MeshStandardMaterial({
+    color: 0x00ff00,
+    emissive: 0x001100,
+    wireframe: true,
+  });
+  const plane = new THREE.Mesh(geometry, material);
+  scene.add(plane);
+
+  // Add dynamic lighting
+  const ambientLight = new THREE.AmbientLight(0x404040); // Soft white light
+  scene.add(ambientLight);
+
+  const pointLight = new THREE.PointLight(0x00ff00, 1, 100);
+  pointLight.position.set(10, 20, 10);
+  scene.add(pointLight);
+
+  // Camera position
+  camera.position.set(0, 10, 20);
+  camera.lookAt(0, 0, 0);
+
+  // Animation loop
+  function animate() {
+    requestAnimationFrame(animate);
+
+    // Animate the landscape
+    const time = Date.now() * 0.001;
+    const positionAttribute = geometry.attributes.position;
+    const vertexCount = positionAttribute.count;
+
+    for (let i = 0; i < vertexCount; i++) {
+      const x = positionAttribute.getX(i);
+      const y = positionAttribute.getY(i);
+      const z = Math.sin(time + x * 0.1 + y * 0.1) * 2;
+      positionAttribute.setZ(i, z);
+    }
+    positionAttribute.needsUpdate = true;
+
+    // Change background color dynamically
+    const r = Math.sin(time * 0.3) * 127 + 128;
+    const g = Math.sin(time * 0.5) * 127 + 128;
+    const b = Math.sin(time * 0.7) * 127 + 128;
+    renderer.setClearColor(`rgb(${Math.floor(r)}, ${Math.floor(g)}, ${Math.floor(b)})`);
+
+    renderer.render(scene, camera);
+  }
+
+  animate();
+
+  // Handle window resize
+  window.addEventListener('resize', () => {
+    camera.aspect = container.offsetWidth / container.offsetHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(container.offsetWidth, container.offsetHeight);
+  });
+</script>
+
+<h3>Recent System Updates</h3>
+<p>Successfully integrated new bio-digital interface protocols. Enhanced matrix navigation algorithms by 47%. Currently debugging anomalous code patterns in Sector 7-G that appear to exhibit self-modifying behavior.</p>
+
+<h3>Neural Pathways</h3>
+<p>
+    <a href="/about">Access biographical data</a> | 
+    <a href="/research">View research matrices</a> | 
+    <a href="/cv">Download credential files</a> | 
+    <a href="/contact">Establish connection</a>
+</p>
+
+</body>
